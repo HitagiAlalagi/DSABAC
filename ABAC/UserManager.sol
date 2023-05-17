@@ -5,11 +5,12 @@ pragma solidity ^0.8.0;
 import "./Interfaces/IUserManager.sol";
 
 contract UserManager is IUserManager{
+    //define user
     mapping(address => User) users;
     //define user struct
     struct User {
         address userAddr;
-        mapping(string => bool) attrs; //The attr of the user;
+        mapping(string => string) attrs; //The attrs of the user;
         string userName;
         uint securityClearance;
     }
@@ -36,15 +37,26 @@ contract UserManager is IUserManager{
         return users[user].userName;
     }
 
-    function grantAttr(address user, string calldata attrs) external override{
+    function grantAttr(address user, string calldata attr) external override{
+        if (checkUserExists(user)) {
+            // grant attr
+            //users[user].attrs[attr] = ?string?;
+        }
+    }
+
+    function revokeAttr(address user, string calldata attr) external override {
         
     }
 
-    function revokeAttr(address user, string calldata attrs) external override {
-        
+    function hasAttr(address user, string calldata attr) external view returns (bool) {
+
     }
 
-    function hasAttr(address user, string calldata attrs) external view returns (bool) {
+    function updateSecurityClearance(address user, uint256 newLevel) external override{
+
+    }
+
+    function getSecurityClearance(address user) external override view returns(uint256){
 
     }
 }
